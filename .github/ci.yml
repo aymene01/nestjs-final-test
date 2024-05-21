@@ -1,0 +1,61 @@
+name: NestJS CI
+
+on: 
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: "*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB:  nestjs-final-test-db
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 24000:5432
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run linters
+      run: npm run lint
+
+    - name: Run prettier check
+      run: npm run format
+
+    - name: Build
+      run: npm run build
+
+    - name: Run e2e tests with PostgreSQL
+      env:
+        DBMS: postgres
+        POSTGRES_DB: nestjs-final-test-db
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 24000
+
+      run: npm run test:e2e:postgres
