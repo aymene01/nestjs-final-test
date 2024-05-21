@@ -13,10 +13,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
 
     async enableShutdownHooks(app: INestApplication) {
         process.on('beforeExit', async () => {
-            console.log(
-                'Disconnecting from the database',
-                this.constructor.name,
-            );
+            console.log('Disconnecting from the database');
             await app.close();
         });
     }
