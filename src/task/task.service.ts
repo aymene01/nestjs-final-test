@@ -1,22 +1,47 @@
-import { Injectable, NotImplementedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../infrastructure/database/services/prisma.service';
+import { Prisma, Task } from '@prisma/client';
+import { AddTaskDto } from './dtos/add-task.dto';
 
 @Injectable()
 export class TaskService {
-    constructor() {}
+    constructor(private readonly prisma: PrismaService) {}
 
-    addTask(name: string, userId: string, priority: number): Promise<void> {
-        throw new NotImplementedException();
+    async addTask(
+        name: AddTaskDto['name'],
+        userId: AddTaskDto['userId'],
+        priority: AddTaskDto['priority'],
+    ): Promise<Task> {
+        return this.prisma.task.create({
+            data: {
+                name,
+                priority: priority ? Number(priority) : 0,
+                user: {
+                    connect: {
+                        id: userId,
+                    },
+                },
+            },
+        });
     }
 
-    getTaskByName(name: string): Promise<unknown> {
-        throw new NotImplementedException();
+    getTaskByName(name: string): Promise<Task | null> {
+        return this.prisma.task.findFirst({
+            where: {
+                name,
+            },
+        });
     }
 
-    getUserTasks(userId: string): Promise<unknown[]> {
-        throw new NotImplementedException();
+    async getUserTasks(userId: string): Promise<Task[]> {
+        return this.prisma.task.findMany({
+            where: {
+                userId,
+            },
+        });
     }
 
-    resetData(): Promise<void> {
-        throw new NotImplementedException();
+    async resetData(): Promise<Prisma.BatchPayload> {
+        return this.prisma.task.deleteMany();
     }
 }

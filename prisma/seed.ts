@@ -5,22 +5,25 @@ const prisma = new PrismaClient();
 interface UserWithTasks {
     email: string;
     name: string | null;
-    tasks: { name: string }[];
+    tasks: { name: string; priority: number }[];
 }
 
 const usersWithTasks: UserWithTasks[] = [
     {
         email: 'user1@example.com',
         name: 'User 1',
-        tasks: [{ name: 'Task 1.1' }, { name: 'Task 1.2' }],
+        tasks: [
+            { name: 'Task 1.1', priority: 10 },
+            { name: 'Task 1.2', priority: 12 },
+        ],
     },
     {
         email: 'user2@example.com',
         name: 'User 2',
         tasks: [
-            { name: 'Task 2.1' },
-            { name: 'Task 2.2' },
-            { name: 'Task 2.3' },
+            { name: 'Task 2.1', priority: 1 },
+            { name: 'Task 2.2', priority: 23 },
+            { name: 'Task 2.3', priority: 10 },
         ],
     },
 ];
@@ -36,11 +39,12 @@ const createUser = async (email: string, name: string | null) => {
     return user;
 };
 
-const createTask = async (name: string, userId: string) => {
+const createTask = async (name: string, userId: string, priority: number) => {
     const task = await prisma.task.create({
         data: {
             name,
             userId,
+            priority,
         },
     });
     console.log(
@@ -53,7 +57,7 @@ const seed = async () => {
         const user = await createUser(email, name);
         await Promise.all(
             tasks.map(async (task) => {
-                await createTask(task.name, user.id);
+                await createTask(task.name, user.id, task.priority);
             }),
         );
         return user;

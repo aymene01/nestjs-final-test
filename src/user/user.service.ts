@@ -2,20 +2,18 @@ import {
     ConflictException,
     Injectable,
     BadRequestException,
-    NotFoundException,
 } from '@nestjs/common';
 import { User, Prisma } from '@prisma/client';
 import { AddUserDto, GetUserDto } from './dtos';
 import { PrismaService } from '../infrastructure/database/services/prisma.service';
-
-const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+import { isValidEmail } from '../utils/validation';
 
 @Injectable()
 export class UserService {
     constructor(private prisma: PrismaService) {}
 
     async addUser(email: AddUserDto['email']): Promise<User> {
-        const isEmailValid = EMAIL_REGEX.test(email);
+        const isEmailValid = isValidEmail(email);
 
         if (!isEmailValid) {
             throw new BadRequestException('Invalid email');
