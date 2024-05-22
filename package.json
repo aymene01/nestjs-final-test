@@ -9,6 +9,7 @@
         "build": "nest build",
         "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
         "start": "nest start",
+        "setup": "docker-compose --env-file ./.env -f ./docker/docker-compose-postgres.yml up -d && npm ci && npx prisma db push",
         "start:dev": "npx prisma generate && nest start --watch",
         "start:debug": "nest start --debug --watch",
         "start:prod": "node dist/main",
