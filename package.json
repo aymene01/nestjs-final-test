@@ -23,7 +23,8 @@
         "start:postgres": "export DBMS=postgres; docker-compose --env-file ./.env -f ./docker/docker-compose-postgres.yml up -d; npm run start:dev",
         "db:seed": "npx tsx prisma/seed.ts",
         "db:push": "npx prisma db push",
-        "db:migrate": "npx prisma migrate dev"
+        "db:migrate": "npx prisma migrate dev",
+        "postinstall": "npx prisma generate"
     },
     "dependencies": {
         "@nestjs/common": "^10.0.0",
