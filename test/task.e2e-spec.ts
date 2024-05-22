@@ -1,5 +1,5 @@
 import { AppModule } from '../src/app.module';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { TaskService } from '../src/task/task.service';
 import { Test } from '@nestjs/testing';
 import { UserService } from '../src/user/user.service';
@@ -14,6 +14,7 @@ describe('TaskController', () => {
     describe('GET /user/:userId', () => {
         beforeEach(async () => {
             app = await createNestApplication();
+            app.useGlobalPipes(new ValidationPipe());
             taskService = app.get(TaskService);
             userService = app.get(UserService);
 

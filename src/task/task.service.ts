@@ -1,26 +1,31 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../infrastructure/database/services/prisma.service';
 import { Prisma, Task } from '@prisma/client';
-import { AddTaskDto } from './dtos/add-task.dto';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class TaskService {
-    constructor(private readonly prisma: PrismaService) {}
+    constructor(
+        private readonly prisma: PrismaService,
+        private readonly userService: UserService,
+    ) {}
 
     async addTask(
-        name: AddTaskDto['name'],
-        userId: AddTaskDto['userId'],
-        priority: AddTaskDto['priority'],
+        name: string,
+        userId: string,
+        priority: number,
     ): Promise<Task> {
+        const user = await this.userService.getUserById(userId);
+
+        if (!user) {
+            throw new BadRequestException(`User with ${userId} does not exist`);
+        }
+
         return this.prisma.task.create({
             data: {
                 name,
-                priority: priority ? Number(priority) : 0,
-                user: {
-                    connect: {
-                        id: userId,
-                    },
-                },
+                priority: Number(priority),
+                userId: userId,
             },
         });
     }
@@ -34,6 +39,11 @@ export class TaskService {
     }
 
     async getUserTasks(userId: string): Promise<Task[]> {
+        const user = await this.userService.getUserById(userId);
+        if (!user) {
+            throw new BadRequestException(`User with ${userId} does not exist`);
+        }
+
         return this.prisma.task.findMany({
             where: {
                 userId,

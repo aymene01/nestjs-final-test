@@ -1,7 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { Transform } from 'class-transformer';
 
-export class AddTaskDto {
+export class CreateTaskDto {
     @IsNotEmpty()
     @IsString()
     name: string;
@@ -11,7 +10,6 @@ export class AddTaskDto {
     userId: string;
 
     @IsNotEmpty()
-    @Transform(({ value }) => parseInt(value, 10))
     @IsNumber()
     priority: number;
 }
