@@ -1,56 +1,59 @@
-<p align="center">
-  <picture>
-    <source srcset="./assets/logo.png">
-    <img alt="Nestjs API Logo" height="200px" src="./assets/logo.png"> <!-- Logo height increased from 60px to 120px -->
-  </picture>
-  <p align="center">
-    Restfull API using Typescript, Nestjs and Prisma
-    <br />
-    <br />
+<div align="center">
+  <img src="./assets/logo.png" alt="LedgerNet logo" height="200px" />
+  <h1>Nestjs Final Test</h1>
+  <p>
+    Restful API crafted with TypeScript, NestJS, and Prisma
   </p>
-</p>
+  <p>
+    <a href="https://github.com/aymene01/nestjs-final-test/issues"><img src="https://img.shields.io/github/issues/aymene01/nestjs-final-test.svg" alt="GitHub Issues"></a>
+    <a href="https://nestjs.com/"><img src="https://img.shields.io/badge/built%20with-NestJS-ea2845.svg" alt="Built with NestJS"></a>
+  </p>
 
-# NestJS API Readme
+  <!-- Any additional badges here -->
 
-This is a NestJS API created by Aymene Bousbia. It uses PostgreSQL as the database and Docker for containerization.
+  <br />
+</div>
 
-## Author
+---
 
-**Aymene Bousbia**
-- Github: [@aymene01](https://github.com/aymene01)
+## 🚀 About the API
 
-## Prerequisites
+Building robust APIs is an art; this masterpiece scaffolds the foundation with the strength of [NestJS](https://nestjs.com/), leverages the elegance and simplicity of [TypeScript](https://www.typescriptlang.org/), and garnishes it with the power-packed features of [Prisma](https://www.prisma.io/). Curated by Aymene Bousbia, this API serves as a beacon of functionality meets finesse.
 
--   Node.js and npm installed on your system
--   Docker and Docker Compose installed on your system
+## 📝 Prerequisites
 
-## Getting started
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) and [npm](https://npmjs.com/)
+- [Docker](https://www.docker.com/) and Docker Compose
 
-Clone the repository to your local machine:
+## 🛠️ Getting Started
+
+Embrace the journey of setting up your local development with the following commands:
 
 ```bash
+# Clone the repository
 git clone git@github.com:aymene01/nestjs-final-test.git
-```
 
-Navigate to the project directory:
-
-```bash
+# Navigate to the project directory
 cd nestjs-final-test
-```
 
-You can run this command to setup the entire environement (install dependencies, database, etc)
-```bash
+# Setup the environment (install dependencies, database, etc)
 npm run setup
-```
 
-Start the dev server:
-
-```bash
+# Fire up the development server
 npm run start:postgres
-```
 
-Run test
-
-```bash
+# Don't forget to run the tests!
 npm run test:e2e:postgres
 ```
+
+## 👤 Author
+
+**Aymene Bousbia**
+
+- 🔍 Explore: [GitHub Profile](https://github.com/aymene01)
+- 💬 Ask me about anything [here](https://github.com/aymene01/nestjs-final-test/issues).
+
+# 📬 Feedback 
+Your opinions and feedback are what shape the future; let's craft it beautifully together. Share your thoughts in the issues or through discourse.
+<!-- Your personal message or trademark --> <div align="center"> <sub>Built with ❤️ by <a href="https://github.com/aymene01">Aymene Bousbia</a></sub> </div> 
