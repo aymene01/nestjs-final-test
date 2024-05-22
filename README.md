@@ -34,6 +34,9 @@ cd nestjs-final-test
 ```
 
 You can run this command to setup the entire environement (install dependencies, database, etc)
+```bash
+npm run setup
+```
 
 Start the dev server:
 
