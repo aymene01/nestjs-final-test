@@ -33,7 +33,7 @@ export class UserService {
         });
     }
 
-    async resetData(): Promise<Prisma.BatchPayload> {
-        return await this.prisma.user.deleteMany();
+    resetData(): Promise<Prisma.BatchPayload> {
+        return this.prisma.user.deleteMany();
     }
 }
