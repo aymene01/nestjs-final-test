@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
     <source srcset="./assets/logo.png">
-    <img alt="LedgerNet logo" height="200px" src="./assets/logo.png"> <!-- Logo height increased from 60px to 120px -->
+    <img alt="Nestjs API Logo" height="200px" src="./assets/logo.png"> <!-- Logo height increased from 60px to 120px -->
   </picture>
   <p align="center">
     Restfull API using Typescript, Nestjs and Prisma
@@ -13,6 +13,11 @@
 # NestJS API Readme
 
 This is a NestJS API created by Aymene Bousbia. It uses PostgreSQL as the database and Docker for containerization.
+
+## Author
+
+**Aymene Bousbia**
+- Github: [@aymene01](https://github.com/aymene01)
 
 ## Prerequisites
 
