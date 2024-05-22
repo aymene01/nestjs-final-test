@@ -24,7 +24,7 @@ Building robust APIs is an art; this masterpiece scaffolds the foundation with t
 
 Ensure you have the following installed:
 - [Node.js](https://nodejs.org/) and [npm](https://npmjs.com/)
-- [Docker](https://www.docker.com/) and Docker Compose
+- [Docker](https://www.docker.com/)
 
 ## 🛠️ Getting Started
 
